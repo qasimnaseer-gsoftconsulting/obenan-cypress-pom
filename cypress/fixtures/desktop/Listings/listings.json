@@ -1,0 +1,20 @@
+{
+    "smoke": [
+        {
+            "desktop": [
+                {
+                    "listings": [
+                        {
+                            "addLocationExactMatch" : "obenan testing automation, johar, Block R Phase 2 town, Lahore, Pakistan",
+                            "TC2005" : [
+                                {
+                                    "locationMatch" : "obenan testing automation"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

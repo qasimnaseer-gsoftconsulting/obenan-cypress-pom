@@ -1,0 +1,25 @@
+{
+    "smoke" : [
+        {
+            "desktop" : [
+                {
+
+                }
+            ]
+        }
+    ],
+    "regression" : [
+        {
+            "desktop" :[
+                {
+                    "TC1010" : [
+                        {
+                            "zipFile" : "test.zip",
+                            "pdfFile" : "test.pdf"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

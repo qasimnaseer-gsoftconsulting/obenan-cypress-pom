@@ -1,1 +1,1 @@
-# obenan-cypress-pom
+# obenan-qa-automation

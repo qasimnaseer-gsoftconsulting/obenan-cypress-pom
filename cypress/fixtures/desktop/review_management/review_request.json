@@ -1,0 +1,32 @@
+{
+    "smoke" : [
+        {
+            "desktop" : [
+                {
+                    "TC3001" : [
+                        {
+                            "heading" : "Gsoft",
+                            "discription" : "Gsoft Discription"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "regression" : [
+        {
+            "desktop" : [
+                {
+                    "TC3003" : [
+                        {
+                            "review_request_heading" : "Campaigns",
+                            "heading" : "Gsoft",
+                            "discription" : "Gsoft Discription",
+                            "generateQrCodeCheckboxToastText" : "You can get QR code on next page"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

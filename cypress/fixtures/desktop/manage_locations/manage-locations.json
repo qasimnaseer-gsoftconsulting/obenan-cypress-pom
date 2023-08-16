@@ -1,0 +1,32 @@
+{
+    "smoke": [
+        {
+            "desktop": [
+                {
+
+                            "TC6001" : [
+                                {
+                                    "locationName" : "Johar Town, Lahore, Pakistan",
+                                    "postalCode" : 54782
+                                }
+                            ]
+
+                }
+            ]
+        }
+    ],
+    "regression": [
+        {
+            "desktop": [
+                {
+                    "addLocations": [
+                        {
+                           
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+
+}

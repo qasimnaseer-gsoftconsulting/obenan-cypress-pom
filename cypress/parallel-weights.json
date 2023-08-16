@@ -1,0 +1,100 @@
+{
+    "cypress\\e2e\regression\\desktop\\listing_technology\\listings\\TC2001.cy.js" : {
+        "weight":2
+    },
+    "cypress\\e2e\regression\\desktop\\listing_technology\\listings\\TC2002.cy.js" : {
+        "weight":2
+    },
+    "cypress\\e2e\regression\\desktop\\listing_technology\\listings\\TC2003.cy.js" : {
+        "weight":4
+    },
+    "cypress\\e2e\regression\\desktop\\listing_technology\\listings\\TC2004.cy.js" : {
+        "weight":4
+    },
+    "cypress\\e2e\regression\\desktop\\listing_technology\\listings\\TC2005.cy.js" : {
+        "weight":2
+    },
+    "cypress\\e2e\regression\\desktop\\listing_technology\\listings\\TC2006.cy.js" : {
+        "weight":2
+    },
+
+
+
+    "cypress\\e2e\\regression\\desktop\\login_page\\TC1002.cy.js": {
+        "weight": 6
+    },
+    "cypress\\e2e\\regression\\desktop\\login_page\\TC1001.cy.js": {
+        "weight": 2
+    },
+    "cypress\\e2e\\regression\\desktop\\login_page\\TC1004.cy.js": {
+        "weight": 6
+    },
+
+
+
+    "cypress\\e2e\\regression\\desktop\\post_managment\\auto-google-post\\TC1006.cy.js": {
+        "weight": 10
+    },
+    "cypress\\e2e\\regression\\desktop\\post_managment\\auto-google-post\\TC1007.cy.js": {
+        "weight": 10
+    },
+    "cypress\\e2e\\regression\\desktop\\post_managment\\auto-google-post\\TC1008.cy.js": {
+        "weight": 8
+    },
+    "cypress\\e2e\\regression\\desktop\\post_managment\\auto-google-post\\TC1009.cy.js": {
+        "weight": 10
+    },
+    "cypress\\e2e\\regression\\desktop\\post_managment\\auto-google-post\\TC1010.cy.js": {
+        "weight": 8
+    },
+
+    
+    
+    
+    
+    "cypress\\e2e\\regression\\desktop\\review_management\\review_request\\TC3002.cy.js" : {
+        "weight":10
+    },
+    "cypress\\e2e\\regression\\desktop\\review_management\\review_request\\TC3003.cy.js" : {
+        "weight":6
+    },
+    "cypress\\e2e\\regression\\desktop\\review_management\\review_request\\TC3004.cy.js" : {
+        "weight":4
+    },
+    "cypress\\e2e\\regression\\desktop\\review_management\\review_request\\TC3005.cy.js" : {
+        "weight":4
+    },
+    "cypress\\e2e\\regression\\desktop\\review_management\\review_request\\TC3006.cy.js" : {
+        "weight":6
+    },
+    "cypress\\e2e\\regression\\desktop\\review_management\\review_request\\TC3009.cy.js" : {
+        "weight":10
+    },
+
+    
+    
+    "cypress\\e2e\\smoke\\desktop\\listing_technology\\listings\\TC2007.cy.js":{
+        "weight":8
+    },
+    
+    
+    "cypress\\e2e\\smoke\\desktop\\login_page\\TC1003.cy.js": {
+        "weight": 4
+    },
+    
+    
+    "cypress\\e2e\\smoke\\desktop\\manage_locations\\add_location\\TC6001.cy.js" :{
+        "weight":8
+    },
+
+    
+    "cypress\\e2e\\smoke\\desktop\\post_managment\\auto-google-post\\TC1005.cy.js": {
+        "weight": 8
+    },
+
+
+    "cypress\\e2e\\smoke\\desktop\\review_management\\review_request\\TC3001.cy.js":{
+        "weight":6
+    }
+
+}
