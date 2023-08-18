@@ -6,11 +6,6 @@ workflows:
   use-my-orb:
     jobs:
       - cypress/run:
-          cypress-command: npx cypress run --browser chrome
+          cypress-command: npx cypress run --browser chrome --env email=$email --env password=$password --env apiURL=$apiURL
           install-browsers: true
-          environment:
-          baseURL: baseURL
-          apiURL: apiURL
-          email: email
-          password: password
           start-command: npm run
