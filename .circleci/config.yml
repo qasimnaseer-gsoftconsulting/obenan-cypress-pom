@@ -14,8 +14,9 @@ jobs:
     executor: my-custom-executor
     steps:
       - checkout
-      - run: npm install 
+      - run : sudo apt install nodejs
       - run : npm install cypress 
+      - run: npm install 
       - run : npx cypress run --browser chrome --headless --spec 'cypress/e2e/testsuit.cy.js'
 
 workflows:
