@@ -1,0 +1,77 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - npm-v1-{{ .Branch }}-
+            - npm-v1-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: npm-v1-{{ .Branch }}-
+  test:
+    docker:
+      - image: cypress/browsers:node14.17.0-chrome91-ff89
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - npm-v1-{{ .Branch }}-
+            - npm-v1-
+      - run: npm install
+      - run: npx cypress install
+
+workflows:
+  version: 2
+  smoke-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - run: npm run test:smoke-desktop-suite
+    filters:
+      branches:
+        only:
+          - main # adjust the branch name if needed
+
+  regression-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - run: npm run test:regression-desktop-suite
+    filters:
+      branches:
+        only:
+          - main # adjust the branch name if needed
+
+  desktop-test-suite:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - run: npm run test:desktop-suite 
+    filters:
+      branches:
+        only:
+          - main # adjust the branch name if needed
+
+  cypress-parallel-testing:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - run: npm run test:cypress-parallel 
+    filters:
+      branches:
+        only:
+          - main # adjust the branch name if needed
