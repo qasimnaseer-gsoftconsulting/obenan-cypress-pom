@@ -28,6 +28,10 @@ jobs:
             - cypress-{{ .Branch }}-
       - run: npm install
       - run: npx cypress install
+
+      # Install required libraries
+      - run: sudo apt-get update && sudo apt-get install -y libnss3
+
   desktop-test-suite:
     docker:
       - image: circleci/node:14
@@ -40,6 +44,8 @@ jobs:
             - cypress-{{ .Branch }}-
       - run: npx cypress install
       - run: npx cypress run --browser chrome --headless --spec 'cypress/e2e/testsuit.cy.js'
+      - run: sudo apt-get update && sudo apt-get install -y libnss3
+
 workflows:
   version: 2
   desktop-test-suite-workflow:
