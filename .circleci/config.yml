@@ -11,4 +11,4 @@ workflows:
           start-command: npm run 
     post-steps:
             - store_artifacts:
-                path: << parameters.working-directory >>/cypress/screenshots
+                path: /cypress/screenshots
