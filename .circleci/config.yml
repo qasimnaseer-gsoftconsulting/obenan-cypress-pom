@@ -9,3 +9,6 @@ workflows:
           cypress-command: npx cypress run --browser chrome --spec 'cypress/e2e/testsuit.cy.js' 
           install-browsers: true
           start-command: npm run 
+    post-steps:
+            - store_artifacts:
+                path: /cypress/screenshots
