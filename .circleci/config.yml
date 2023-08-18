@@ -14,6 +14,7 @@ jobs:
           paths:
             - node_modules
           key: npm-v1-{{ .Branch }}-
+
   test:
     docker:
       - image: cypress/browsers:node14.17.0-chrome91-ff89
@@ -23,15 +24,28 @@ jobs:
           keys:
             - npm-v1-{{ .Branch }}-
             - npm-v1-
-      - run: npm install
       - run: npx cypress install
+
+  desktop-test-suite: # Assuming this is the job where you want to run the command
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - npm-v1-{{ .Branch }}-
+            - npm-v1-
+      - run: npx cypress run --browser chrome --headless --spec 'cypress/e2e/testsuit.cy.js'
 
 workflows:
   version: 2
-  smoke-test:
+  desktop-test-suite-workflow:
     jobs:
       - build
       - test:
           requires:
             - build
-      
+      - desktop-test-suite: # This will execute the modified command in the desktop-test-suite job
+          requires:
+            - test
+
