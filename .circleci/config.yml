@@ -8,4 +8,9 @@ workflows:
       - cypress/run:
           cypress-command: npx cypress run --browser chrome
           install-browsers: true
-          start-command: npm run 
+          environment:
+          baseURL: baseURL
+          apiURL: apiURL
+          email: email
+          password: password
+          start-command: npm run
