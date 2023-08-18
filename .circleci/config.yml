@@ -1,8 +1,12 @@
 version: 2.1
+executors:
+  docker-executor:
+    docker:
+      - image: cypress/browsers:node14.17.0-chrome91-ff89
+
 jobs:
   build:
-    docker:
-      - image: circleci/node:14
+    executor: docker-executor
     steps:
       - checkout
       - restore_cache:
@@ -16,9 +20,9 @@ jobs:
             - node_modules
             - ~/.cache/Cypress
           key: npm-v1-{{ .Branch }}-
+
   test:
-    docker:
-      - image: cypress/browsers:node14.17.0-chrome91-ff89
+    executor: docker-executor
     steps:
       - checkout
       - restore_cache:
@@ -29,12 +33,8 @@ jobs:
       - run: npm install
       - run: npx cypress install
 
-      # Install required libraries
-      - run: sudo apt-get update && sudo apt-get install -y libnss3
-
   desktop-test-suite:
-    docker:
-      - image: circleci/node:14
+    executor: docker-executor
     steps:
       - checkout
       - restore_cache:
@@ -44,7 +44,6 @@ jobs:
             - cypress-{{ .Branch }}-
       - run: npx cypress install
       - run: npx cypress run --browser chrome --headless --spec 'cypress/e2e/testsuit.cy.js'
-      - run: sudo apt-get update && sudo apt-get install -y libnss3
 
 workflows:
   version: 2
