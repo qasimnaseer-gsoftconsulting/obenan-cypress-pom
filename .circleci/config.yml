@@ -6,6 +6,6 @@ workflows:
   use-my-orb:
     jobs:
       - cypress/run:
-          cypress-command: test:desktop-suite 
+          cypress-command: npx cypress run --browser chrome --spec 'cypress/e2e/testsuit.cy.js' 
           install-browsers: true
           start-command: npm run 
