@@ -1,25 +1,38 @@
 version: 2.1
-executors:
-  my-custom-executor:
-    docker:
-      - image: cimg/base:stable
-        auth:
-          # ensure you have first added these secrets
-          # visit app.circleci.com/settings/project/github/qasimnaseer-gsoftconsulting/obenan-cypress-pom/environment-variables
-          username: $DOCKER_HUB_USER
-          password: $DOCKER_HUB_PASSWORD
 jobs:
-  hello-world:
-
-    executor: my-custom-executor
+  build:
+    docker:
+      - image: circleci/node:18
     steps:
       - checkout
-      - run : sudo apt install nodejs
-      - run : npm install cypress 
-      - run: npm install 
-      - run : npx cypress run --browser chrome --headless --spec 'cypress/e2e/testsuit.cy.js'
+      - restore_cache:
+          keys:
+            - npm-v18-{{ .Branch }}-
+            - npm-v18-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: npm-v18-{{ .Branch }}-
+  test:
+    docker:
+      - image: cypress/browsers:node18.17.1-chrome91-ff89
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - npm-v18-{{ .Branch }}-
+            - npm-v18-
+      - run: npm install
+      - run: npx cypress install
+      - run : npx cypress run
 
 workflows:
-  my-custom-workflow:
+  version: 2
+  smoke-test:
     jobs:
-      - hello-world
+      - build
+      - test:
+          requires:
+            - build
+  
