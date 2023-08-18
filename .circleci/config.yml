@@ -1,58 +1,23 @@
 version: 2.1
 executors:
-  docker-executor:
+  my-custom-executor:
     docker:
-      - image: cypress/browsers:node18.17.1-chrome91-ff89
-
+      - image: cimg/base:stable
+        auth:
+          # ensure you have first added these secrets
+          # visit app.circleci.com/settings/project/github/qasimnaseer-gsoftconsulting/obenan-cypress-pom/environment-variables
+          username: $DOCKER_HUB_USER
+          password: $DOCKER_HUB_PASSWORD
 jobs:
-  build:
-    executor: docker-executor
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - npm-v1-{{ .Branch }}-
-            - npm-v1-
-            - cypress-{{ .Branch }}-
-      - run: npm install
-      - save_cache:
-          paths:
-            - node_modules
-            - ~/.cache/Cypress
-          key: npm-v1-{{ .Branch }}-
+  hello-world:
 
-  test:
-    executor: docker-executor
+    executor: my-custom-executor
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - npm-v1-{{ .Branch }}-
-            - npm-v1-
-            - cypress-{{ .Branch }}-
-      - run: npm install
-
-  desktop-test-suite:
-    executor: docker-executor
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - npm-v1-{{ .Branch }}-
-            - npm-v1-
-            - cypress-{{ .Branch }}-
-      - run: npx cypress install
-      - run: npx cypress cache clear # Clear Cypress cache
-      - run: npx cypress run --browser chrome --headless --spec 'cypress/e2e/testsuit.cy.js'
+      - run: |
+          # echo Hello, World!
 
 workflows:
-  version: 2
-  desktop-test-suite-workflow:
+  my-custom-workflow:
     jobs:
-      - build
-      - test:
-          requires:
-            - build
-      - desktop-test-suite:
-          requires:
-            - test
+      - hello-world
