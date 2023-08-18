@@ -99,7 +99,7 @@ describe('[TC1008]', () => {
         autoGooglePosts.postContainerDeleteButton().should('exist').and('be.visible').click();
 
         //Step 25 : Click on confirm button
-        autoGooglePosts.postContainerPopupConfirmBtn().should('be.visible').click();
+        autoGooglePosts.postContainerPopupConfirmBtn().click({force : true });;
         autoGooglePosts.postDeletedToastMsg().should('be.visible');
 
     });

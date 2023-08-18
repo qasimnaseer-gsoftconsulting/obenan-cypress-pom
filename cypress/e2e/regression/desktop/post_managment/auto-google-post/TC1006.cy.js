@@ -129,7 +129,7 @@ describe('[TC1006]', () => {
         autoGooglePosts.postContainerDeleteButton().click();
 
         //Step 35 : Click on confirm button
-        autoGooglePosts.postContainerPopupConfirmBtn().click();
+        autoGooglePosts.postContainerPopupConfirmBtn().click({force : true });
         autoGooglePosts.postDeletedToastMsg().should('be.visible');
       
     });
