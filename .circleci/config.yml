@@ -31,7 +31,6 @@ jobs:
             - npm-v1-
             - cypress-{{ .Branch }}-
       - run: npm install
-      - run: npx cypress install
 
   desktop-test-suite:
     executor: docker-executor
@@ -42,7 +41,6 @@ jobs:
             - npm-v1-{{ .Branch }}-
             - npm-v1-
             - cypress-{{ .Branch }}-
-      - run: npx cypress install
       - run: npx cypress run --browser chrome --headless --spec 'cypress/e2e/testsuit.cy.js'
 
 workflows:
