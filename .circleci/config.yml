@@ -41,6 +41,8 @@ jobs:
             - npm-v1-{{ .Branch }}-
             - npm-v1-
             - cypress-{{ .Branch }}-
+      - run: npx cypress install
+      - run: npx cypress cache clear # Clear Cypress cache
       - run: npx cypress run --browser chrome --headless --spec 'cypress/e2e/testsuit.cy.js'
 
 workflows:
