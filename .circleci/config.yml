@@ -18,7 +18,7 @@ jobs:
       - attach_workspace:
           at: ~/
       - cypress/run-tests:
-          cypress-command: npx cypress run --component --parallel --record
+          cypress-command: npx cypress run
 workflows:
   use-my-orb:
     jobs:
