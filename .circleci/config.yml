@@ -1,17 +1,18 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@3.1.3
-  
+  cypress: cypress-io/cypress@3
+jobs:
+  install-and-persist:
+    executor: cypress/default
+    steps:
+      - cypress/install
+      - persist_to_workspace:
+          paths:
+            - .cache/Cypress
+            - project
+          root: ~/
 workflows:
   use-my-orb:
     jobs:
-      - cypress/run:
-          cypress-command: npx cypress run --browser chrome --spec 'cypress/e2e/testsuit.cy.js' 
-          install-browsers: true
-          start-command: npm run
-          post-steps:
-            - run: ls
-            - store_test_results:
-                path: cypress/reports
-            - store_artifacts:
-                path: cypress/screenshots
+      - install-and-persist:
+          name: Install & Persist To Workspace
