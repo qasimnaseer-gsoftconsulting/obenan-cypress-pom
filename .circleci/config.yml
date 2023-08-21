@@ -10,7 +10,7 @@ workflows:
             package-manager: npm 
             cypress-cache-key: custom-cypress-cache-v1-{{ arch }}-{{ checksum "package.json" }} 
             cypress-cache-path: ~/.cache/custom-dir/Cypress 
-            cypress-command: npm run cypress-parallel -s cy:run -t 5 -d 'cypress/e2e/**/TC*.cy.js' -w 'cypress/parallel-weights.json' 
+            cypress-command: npm run test:cypress-parallel 
             parallelism: 5 
-            working-directory: ~/project/ 
+            working-directory: ~/project 
       
