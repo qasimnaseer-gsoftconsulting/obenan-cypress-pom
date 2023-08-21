@@ -1,15 +1,26 @@
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@3
-executor:
-  docker:
-    image: cypress/browsers:node-16.18.1-chrome-109.0.5414.74-1-ff-109.0-edge-109.0.1518.52-1 # your Docker image here
-workflows:
-  use-my-orb:
-    jobs:
-      - cypress/run:
-          cypress-command: npx cypress run --browser chrome --spec 'cypress/e2e/testsuit.cy.js' 
+jobs:
+  install:
+    executor: cypress/default
+    steps:
+      - cypress/install:
           install-browsers: true
-          start-command: npm run
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - .cache/Cypress
+            - project
+  run-tests:
+    executor: cypress/default
+    parallelism: 10
+    steps:
+      - run: echo "This step assumes dependencies were installed using the cypress/install job"
+      - attach_workspace:
+          at: ~/
+      - cypress/run-tests:
+          cypress-command: 'npx cypress run --parallel'
+          start-command: 'npm run start'
           
           
