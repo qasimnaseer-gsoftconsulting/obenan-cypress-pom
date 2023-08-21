@@ -1,51 +1,9 @@
 version: 2.1
 jobs:
-  one:
+  build:
     docker:
       - image: cimg/node:20.5.1
     steps:
       - checkout
-      - run: echo "A first hello job"
-      - run: mkdir -p my_workspace
-      - run: echo "Trying out workspace" > my_workspace/echo-output
-      - persist_to_workspace:
-          root: my_workspace 
-          paths: 
-            - echo-output
-
-  second:
-    docker:
-      - image: cimg/node:20.5.1
-    steps:
-      - checkout
-      - run: echo "A second hello job"
-      - attach_workspace:
-          at: my_workspace
-      - run: npm install
-      - run: npx cypress run
-
-  third:
-    docker:
-      - image: cimg/node:20.5.1
-    steps:
-      - checkout # Checkout your source code
-      # Install dependencies
-      - run:
-          name: Install Dependencies
-          command: npm install
-      # Run Cypress tests
-      - run:
-          name: Run Cypress Tests
-          command: npm run cypress
-
-workflows:
-  version: 2
-  one_and_second:
-    jobs:
-      - one
-      - second:
-          requires:
-            - one
-      - third:
-          requires:
-            - second
+      - run: node --version
+    
