@@ -9,7 +9,7 @@ workflows:
           install-browsers: true
           start-command: npm run
           store_artifacts: true
-            - move-screenshots:
+      - move-screenshots:
           docker:
             - image: circleci/node:latest
           steps:
