@@ -6,7 +6,6 @@ jobs:
     steps:
       - checkout
       - run: node --version
-      - run: apt-get update && apt-get install -y xvfb
       - run: npm install
       - run: npx cypress --version
 
