@@ -2,7 +2,8 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cypress/browsers:node14.17.0-chrome89-ff86
+      - image: cimg/node:lts
+    resource_class: xlarge
     steps:
       - checkout
       - run: node --version
@@ -11,7 +12,8 @@ jobs:
 
   build-run:
     docker:
-      - image: cypress/browsers:node14.17.0-chrome89-ff86
+      - image: cimg/node:lts
+    resource_class: xlarge
     steps:
       - checkout
       - run: npx cypress run
