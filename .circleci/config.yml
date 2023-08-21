@@ -8,7 +8,11 @@ jobs:
       - run: node --version
       - run: npm install
       - run: npx cypress --version
-
+      - save_cache:
+          paths:
+            - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
+          key: 
+            node_modules
 workflows:
   version: 2.1 
   build-and-run:
