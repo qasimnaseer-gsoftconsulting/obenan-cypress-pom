@@ -5,7 +5,6 @@ orbs:
 workflows:
   use-my-orb:
     jobs:
-      working_directory: /obenan-cypress-pom
       - cypress/run:
           cypress-command: npx cypress run --browser chrome --spec 'cypress/e2e/testsuit.cy.js' 
           install-browsers: true
