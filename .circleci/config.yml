@@ -2,10 +2,12 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:20.5.1
+      - image: cimg/node:20.5.1 
     steps:
       - checkout
       - run: node --version
+      - restore_cache:
+            key: npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
       - run: npm install
       - run: npx cypress --version
       - save_cache:
