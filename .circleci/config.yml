@@ -11,8 +11,14 @@ jobs:
             - .cache/Cypress
             - project
           root: ~/
+  run-test:
+    executor: cypress/default
+    steps:
+      - run: npx cypress run 
 workflows:
   use-my-orb:
     jobs:
       - install-and-persist:
           name: Install & Persist To Workspace
+      - run-test:
+          name: run cypress
