@@ -1,27 +1,8 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@3
-executors:
-  with-chrome:
-    resource_class: small
-    docker:
-      - image: "cypress/browsers:node18.12.0-chrome103-ff107"
-workflows:
-  build:
-    jobs:
-      - cypress/install
-          cypress-command: npx cypress run --browser chrome --spec 'cypress/e2e/testsuit.cy.js' 
-          install-browsers: true
-          start-command: npm run
-      - cypress/run:
-          requires:
-            - cypress/install
-          executor: with-chrome
-          browser: chrome
-          post-steps:
-            - run: ls
-            - store_test_results:
-                path: cypress/results
-            - store_artifacts:
-                path: cypress/screenshots
-          
+  cypress: cypress-io/cypress@3.1.3
+executorChoice:
+    docker: # executor type
+      - image: cimg/base:2022.09
+        resource_class: 2xlarge
+
