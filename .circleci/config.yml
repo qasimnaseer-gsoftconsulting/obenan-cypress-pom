@@ -11,7 +11,7 @@ jobs:
       - run: npx cypress --version
 
 workflows:
-  version: 2.1
+  version: 2.1 
   build-and-run:
     jobs:
       - build
