@@ -28,6 +28,7 @@
     "cypress-xpath": "^2.0.1"
   },
   "supportFile": "cypress/support/e2e.js",
+  "screenshotFolder":"cypress/screenshots",
   "chromeWebSecurity": false,
   "browser": "chrome",
   "dependencies": {

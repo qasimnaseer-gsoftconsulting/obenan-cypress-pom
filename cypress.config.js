@@ -8,7 +8,6 @@ module.exports = defineConfig({
     specPattern: "**/*.cy.js",
     reporter: "cypress-multi-reporters",
     screenshotOnRunFailure: true,
-    screenshotFolder:cypress/screenshots,
     video: false,
     projectId: 'xy9pnf',//128076ed-9868-4e98-9cef-98dd8b705d75,
     defaultCommandTimeout : 10000,
