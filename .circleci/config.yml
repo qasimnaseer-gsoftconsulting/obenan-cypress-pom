@@ -10,15 +10,13 @@ workflows:
           start-command: npm run
           working-directory: obenan-cypress-pom/cypress # Specify the working directory here
 
-      # Add a new job to store artifacts
-      - store-screenshots:
-          docker:
-            - image: circleci/node:latest
-          steps:
-            - checkout
-            - persist_to_workspace:
-                root: obenan-cypress-pom/cypress # Replace with your actual repository name and cypress folder
-                paths:
-                  - screenshots
-
-          
+    jobs:
+      store-screenshots:
+        docker:
+          - image: circleci/node:latest
+        steps:
+          - checkout
+          - attach_workspace:
+              at: obenan-cypress-pom/cypress
+          - store_artifacts:
+              path: screenshots
