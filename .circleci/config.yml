@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@3.1.3
-
+  resource_class: 2xlarge,
 workflows:
   use-my-orb:
     jobs:
@@ -9,4 +9,21 @@ workflows:
           cypress-command: npx cypress run --browser chrome --spec 'cypress/e2e/testsuit.cy.js' 
           install-browsers: true
           start-command: npm run 
-      
+
+version: 2
+jobs:
+build:
+  working_directory: /cypress
+  steps:
+    - run:
+        name: Creating Dummy Artifacts
+        command: |
+          echo "my artifact file" > /tmp/art-1;
+          echo "my artifact files in a dir" > /cypress/screenshots;
+
+    - store_artifacts:
+        path: /cypress/screenshots
+        destination: artifact-file
+
+    - store_artifacts:
+        path: /cypress/screenshots
