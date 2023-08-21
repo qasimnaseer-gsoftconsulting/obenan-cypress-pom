@@ -10,6 +10,9 @@ workflows:
   build:
     jobs:
       - cypress/install
+          cypress-command: npx cypress run --browser chrome --spec 'cypress/e2e/testsuit.cy.js' 
+          install-browsers: true
+          start-command: npm run
       - cypress/run:
           requires:
             - cypress/install
