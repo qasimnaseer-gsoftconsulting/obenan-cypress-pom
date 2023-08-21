@@ -9,4 +9,18 @@ workflows:
           install-browsers: true
           start-command: npm run
           store_artifacts: true
+            - move-screenshots:
+          docker:
+            - image: circleci/node:latest
+          steps:
+            - checkout
+            - run:
+                name: Move Cypress screenshots
+                command: |
+                  mkdir -p cypress/screenshots
+                  mv /path/to/old/screenshots/*.png cypress/screenshots/
+            - persist_to_workspace:
+                root: .
+                paths:
+                  - cypress/screenshots
           
