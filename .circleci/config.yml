@@ -1,6 +1,9 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@3.1.3
+  cypress: cypress-io/cypress@3
+executor:
+  docker:
+    image: cypress/browsers:node-16.18.1-chrome-109.0.5414.74-1-ff-109.0-edge-109.0.1518.52-1 # your Docker image here
 workflows:
   use-my-orb:
     jobs:
