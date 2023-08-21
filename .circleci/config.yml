@@ -1,26 +1,12 @@
 version: 2.1
 orbs:
-  cypress: cypress-io/cypress@3
-jobs:
-  install:
-    executor: cypress/default
-    steps:
-      - cypress/install:
+  cypress: cypress-io/cypress@3.1.3
+workflows:
+  use-my-orb:
+    jobs:
+      - cypress/run:
+          cypress-command: npx cypress run --browser chrome --spec 'cypress/e2e/testsuit.cy.js' 
           install-browsers: true
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - .cache/Cypress
-            - project
-  run-tests:
-    executor: cypress/default
-    parallelism: 10
-    steps:
-      - run: echo "This step assumes dependencies were installed using the cypress/install job"
-      - attach_workspace:
-          at: ~/
-      - cypress/run-tests:
-          cypress-command: 'npx cypress run --parallel'
-          start-command: 'npm run start'
+          start-command: npm run
           
           
