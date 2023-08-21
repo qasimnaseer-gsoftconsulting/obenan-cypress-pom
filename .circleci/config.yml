@@ -6,8 +6,8 @@ jobs:
     steps:
       - checkout
       - run: node --version
-      - restore_cache:
-            key: npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
+      - restore_cache: 
+            key: node_modules
       - run: npm install
       - run: npx cypress --version
       - save_cache:
