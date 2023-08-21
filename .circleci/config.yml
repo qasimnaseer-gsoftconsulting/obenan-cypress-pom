@@ -21,7 +21,19 @@ jobs:
       - attach_workspace:
           at: my_workspace
       - run: npm install
-      - run: npx cypress run 
+      - run: npx cypress run
+  third:
+    executor: node-executor
+    steps:
+      - checkout # Checkout your source code
+      # Install dependencies
+      - run:
+          name: Install Dependencies
+          command: npm install
+      # Run Cypress tests
+      - run:
+          name: Run Cypress Tests
+          command: npm run cypress
 workflows:
   version: 2
   one_and_second:
@@ -30,3 +42,4 @@ workflows:
       - second:
           requires:
             - one
+      - third
