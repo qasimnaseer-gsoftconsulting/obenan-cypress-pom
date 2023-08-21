@@ -2,22 +2,22 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:lts
-    resource_class: xlarge
+      - image: cimg/node:20.5.1
     steps:
       - checkout
       - run: node --version
+      - run: apt-get update && apt-get install -y xvfb
       - run: npm install
       - run: npx cypress --version
 
   build-run:
     docker:
-      - image: cimg/node:lts
-    resource_class: xlarge
+      - image: cimg/node:20.5.1
     steps:
       - checkout
+      - run: apt-get update && apt-get install -y xvfb
       - run: npx cypress run
- 
+
 workflows:
   version: 2.1
   build-and-run:
