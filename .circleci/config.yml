@@ -8,15 +8,3 @@ workflows:
           cypress-command: npx cypress run --browser chrome --spec 'cypress/e2e/testsuit.cy.js' 
           install-browsers: true
           start-command: npm run
-          working-directory: obenan-cypress-pom/cypress # Specify the working directory here
-
-    jobs:
-      store-screenshots:
-        docker:
-          - image: circleci/node:latest
-        steps:
-          - checkout
-          - attach_workspace:
-              at: obenan-cypress-pom/cypress
-          - store_artifacts:
-              path: screenshots
