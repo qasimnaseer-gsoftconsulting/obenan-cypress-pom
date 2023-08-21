@@ -8,5 +8,12 @@ workflows:
           cypress-command: npx cypress run --browser chrome --spec 'cypress/e2e/testsuit.cy.js' 
           install-browsers: true
           start-command: npm run
-          
+      - store-screenshots:
+          docker:
+            - image: circleci/node:latest
+          steps:
+            - checkout
+            - store_artifacts:
+                path: cypress/screenshots
+
           
