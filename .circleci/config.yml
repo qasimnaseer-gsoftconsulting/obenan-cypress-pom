@@ -1,14 +1,39 @@
 version: 2.1
-
 orbs:
-  cypress: cypress-io/cypress@1
+  cypress: cypress-io/cypress@1.29.0
+executors:
+  with-chrome:
+    docker:
+      - image: 'cypress/browsers:latest'
+  with-firefox:
+    docker:
+      - image: 'cypress/browsers:latest'
+  with-electron:
+    docker:
+      - image: 'browsers/cypress-electron:latest'
+
 workflows:
   build:
     jobs:
+
+      - cypress/install:
+          install-command: yarn install --frozen-lockfile --ignore-engines
+
       - cypress/run:
-          context: project_context
-          store_artifacts: true
-         # =======================================================================================
+          name: Chrome
+          yarn: true
+          requires:
+            - cypress/install
+          executor: with-chrome
+          browser: chrome
+          post-steps:
+            - run: ls
+            - store_test_results:
+                path: results
+            - store_artifacts:
+                path: cypress/screenshots
+
+# =======================================================================================
 
 # version: 2.1
 # orbs:
