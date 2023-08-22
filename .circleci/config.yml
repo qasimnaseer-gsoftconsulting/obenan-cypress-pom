@@ -25,6 +25,7 @@ jobs:
       - checkout
       - restore_cache: 
             key: node_modules
+      - run: docker pull cypress/browsers
       - run: npx cypress run
       - save_cache:
           paths:
