@@ -13,6 +13,15 @@ workflows:
             cypress-command: npm run test:cypress-parallel 
             parallelism: 5 
             working-directory: ~/project
+            post-steps:
+              - run:
+                  name: Creating Dummy Artifacts
+                  command: |
+                    echo "my artifact file" > ~/project/art-1;
+                    mkdir ~/project/artifacts;
+                    echo "my artifact files in a dir" > ~/project/artifacts/art-2;
+              - store_artifacts:
+                  path: ~/project/artifacts
 
 
 # version: 2
