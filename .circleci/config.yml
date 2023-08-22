@@ -11,8 +11,8 @@ jobs:
       #       key: node_modules
       - run: npm install
       - run: npx cypress --version
-      - run: sudo apt-get update
-      - run: sudo apt-get install xvfb
+      #for installing all dependencies of machine
+      - run: apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
       - save_cache:
           paths:
             - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
@@ -25,8 +25,6 @@ jobs:
       - checkout
       - restore_cache: 
             key: node_modules
-      - run: Xvfb :99 #for xvfb error
-      - run: export DISPLAY=:99 #for xvfb error
       - run: npx cypress run
       - run: pkill Xvfb
       - save_cache:
