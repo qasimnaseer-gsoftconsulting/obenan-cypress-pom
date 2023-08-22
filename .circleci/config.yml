@@ -17,17 +17,21 @@ jobs:
     executor: cypress/default
     steps:
       - cypress/install
+      - cypress/install:
+          install-browsers: true 
       - persist_to_workspace:
           paths:
             - .cache/Cypress
             - project
           root: ~/
+
   run-tests-in-parallel:
     executor: cypress/default
     parallelism: 8
     steps:
       - attach_workspace:
           at: ~/
+
       - cypress/run-tests:
           cypress-command: npm run test:smoke-desktop-login-suite
 
