@@ -9,9 +9,7 @@ jobs:
     steps:
       - cypress/install:
           install-command: npm install 
-          include-branch-in-node-cache-key: false 
           install-browsers: true 
-          node-cache-version: v1 
           working-directory: ~/project
       - cypress/run-tests:
           cypress-command: test:smoke-desktop-login-suite 
