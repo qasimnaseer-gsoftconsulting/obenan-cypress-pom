@@ -3,7 +3,6 @@ jobs:
   build:
     docker:
       - image: cypress/base:18.16.0 
-    resource_class: medium
     parallelism: 8
     steps:
       - checkout
