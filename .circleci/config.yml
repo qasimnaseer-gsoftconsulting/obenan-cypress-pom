@@ -3,11 +3,12 @@ jobs:
   build:
     docker:
       - image: cypress/base:18.16.0 
+    resource_class: 2xlarge+
     parallelism: 8
     steps:
       - checkout
       # - restore_cache: 
-      #       key: node_modules 
+      #       key: node_modules
       - run: node --version
       - run: npm cache clean --force
       - run: npm install
