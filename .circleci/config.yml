@@ -10,28 +10,14 @@ jobs:
             key: node_modules
       - run: npm install
       - run: npx cypress --version
-
-
-  install-browser:
-    docker:
-      - image: cypress/browsers:node14.17.0-chrome89-ff86
-    steps:
-      - checkout
-      # Install dependencies
-      - run:
-          name: Install Browsers
-          command: npm install
       - save_cache:
           paths:
             - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
           key: 
             node_modules
-
+    
 workflows:
   version: 2.1 
   build-and-run:
     jobs:
       - build
-      - install-browser:
-          requires:
-            - build
