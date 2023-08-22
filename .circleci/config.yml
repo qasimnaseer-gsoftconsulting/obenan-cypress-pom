@@ -19,6 +19,7 @@ jobs:
         - image: cimg/base:stable
       working_directory: ~/project
       steps:
+        - run: npm cache clean --force
         - run:
             name: Creating Dummy Artifacts
             command: |
