@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: cypress/base:18.16.0 
+    parallelism: 28
     steps:
       - checkout
       # - restore_cache: 
