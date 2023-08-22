@@ -1,6 +1,6 @@
 version: 2.1
-# orbs:
-#   cypress: cypress-io/cypress@3.1.3
+orbs:
+  cypress: cypress-io/cypress@3.1.3
 # workflows:
 #     example-workflow:
 #       jobs:
@@ -27,26 +27,26 @@ jobs:
       - run: npm cache clean --force
       - run: npm install
       - run: npx cypress --version
-      - run: 
-          name: Prepare Package Files
-          command: |
-            TARGET_DIR="/tmp"
-            if [ -n "$HOMEDRIVE" ]; then
-              TARGET_DIR="$HOMEDRIVE\\tmp"
-            fi
+      # - run: 
+      #     name: Prepare Package Files
+      #     command: |
+      #       TARGET_DIR="/tmp"
+      #       if [ -n "$HOMEDRIVE" ]; then
+      #         TARGET_DIR="$HOMEDRIVE\\tmp"
+      #       fi
 
-            if [ -f "package-lock.json" ]; then
-              echo "Found package-lock.json file, assuming lockfile"
-              cp package-lock.json $TARGET_DIR/node-project-lockfile
-            elif [ -f "npm-shrinkwrap.json" ]; then
-              echo "Found npm-shrinkwrap.json file, assuming lockfile"
-              cp npm-shrinkwrap.json $TARGET_DIR/node-project-lockfile
-            elif [ -f "yarn.lock" ]; then
-              echo "Found yarn.lock file, assuming lockfile"
-              cp yarn.lock $TARGET_DIR/node-project-lockfile
-            fi
+      #       if [ -f "package-lock.json" ]; then
+      #         echo "Found package-lock.json file, assuming lockfile"
+      #         cp package-lock.json $TARGET_DIR/node-project-lockfile
+      #       elif [ -f "npm-shrinkwrap.json" ]; then
+      #         echo "Found npm-shrinkwrap.json file, assuming lockfile"
+      #         cp npm-shrinkwrap.json $TARGET_DIR/node-project-lockfile
+      #       elif [ -f "yarn.lock" ]; then
+      #         echo "Found yarn.lock file, assuming lockfile"
+      #         cp yarn.lock $TARGET_DIR/node-project-lockfile
+      #       fi
 
-            cp package.json $TARGET_DIR/node-project-package.json
+      #       cp package.json $TARGET_DIR/node-project-package.json
       - save_cache:
           paths:
             - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
