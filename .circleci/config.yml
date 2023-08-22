@@ -51,7 +51,7 @@ jobs:
             - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
           key: 
             node_modules
-      - run: npm run test:smoke-desktop-login-suite
+      - run: npx cypress run --browser chrome --spec 'cypress/e2e/smoke/desktop/login_page/login-page-suite.cy.js'
 workflows:
   version: 2.1 
   build-and-run:
