@@ -8,6 +8,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - cypress/install:
+          install-command: npm install 
           install-browsers: true 
           include-branch-in-node-cache-key: true 
           package-manager: npm 
