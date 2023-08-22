@@ -2,38 +2,21 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:20.5.1 
+      - image: cypress/base:14
     steps:
       - checkout
       - run: node --version
       - run: npm cache clean --force
-      # - restore_cache: 
-      #       key: node_modules
       - run: npm install
       - run: npx cypress --version
-      - run: cat package-lock.json
-      #for installing all dependencies of machine
-      - run: apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-      - save_cache:
-          paths:
-            - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
-          key: 
-            node_modules
+
   cypress-run:
     docker:
-      - image: cimg/node:20.5.1 
+      - image: cypress/base:14
     steps:
       - checkout
-      - restore_cache: 
-            key: node_modules
       - run: npx cypress run
-      - run: pkill Xvfb
-      - save_cache:
-          paths:
-            - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
-          key: 
-            node_modules
-            
+
 workflows:
   version: 2.1 
   build-and-run:
