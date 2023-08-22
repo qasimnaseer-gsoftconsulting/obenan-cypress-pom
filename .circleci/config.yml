@@ -11,6 +11,7 @@ jobs:
       #       key: node_modules
       - run: npm install
       - run: npx cypress --version
+      - run: cat package-lock.json
       #for installing all dependencies of machine
       - run: apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
       - save_cache:
