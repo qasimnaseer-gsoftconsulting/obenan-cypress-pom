@@ -10,6 +10,8 @@ jobs:
             key: node_modules
       - run: npm install
       - run: npx cypress --version
+      - run: sudo apt-get update
+      - run: sudo apt-get install xvfb
       - save_cache:
           paths:
             - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
