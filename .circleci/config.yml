@@ -12,7 +12,7 @@ jobs:
           include-branch-in-node-cache-key: true 
           package-manager: npm 
           node-cache-version: v1 
-          working-directory: /path/to/obenan-cypress-pom 
+          working-directory: ~/project
       - cypress/run-tests:
           cypress-command: test:smoke-desktop-login-suite 
 
