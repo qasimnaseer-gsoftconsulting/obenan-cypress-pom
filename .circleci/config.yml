@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       - persist_to_workspace:
-          root: ~/
+          root: ~/project
           paths:
             - obenan-cypress-pom
 
@@ -24,7 +24,7 @@ jobs:
     executor: node
     steps:
       - attach_workspace:
-          at: ~/
+          at: ~/project
       - restore_cache:
           keys:
             - v2-deps-{{ .Branch }}-{{ checksum "package.json.lock" }}
