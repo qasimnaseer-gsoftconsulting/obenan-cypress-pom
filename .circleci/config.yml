@@ -1,40 +1,60 @@
 version: 2.1
-orbs:
-  cypress: cypress-io/cypress@3.1.3
-workflows:
-    example-workflow:
-      jobs:
-        - cypress/run:
-            include-branch-in-node-cache-key: false 
-            install-browsers: true 
-            package-manager: npm 
-            cypress-cache-key: custom-cypress-cache-v1-{{ arch }}-{{ checksum "package.json" }} 
-            cypress-cache-path: ~/.cache/custom-dir/Cypress 
-            cypress-command: npm run test:cypress-parallel 
-            parallelism: 5 
-            working-directory: ~/project
-# jobs:
-#   build:
-#     docker:
-#       - image: cypress/browsers:node-18.16.0-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1 
-#     parallelism: 8
-#     steps:
-#       - checkout
-#       # - restore_cache: 
-#       #       key: node_modules
-#       - run: node --version
-#       - run: npm cache clean --force
-#       - run: npm install
-#       - run: npx cypress --version
-#       - save_cache:
-#           paths:
-#             - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
-#           key: 
-#             node_modules
-#       - run: npx run test:smoke-desktop-login-suite
+# orbs:
+#   cypress: cypress-io/cypress@3.1.3
 # workflows:
-#   version: 2.1 
-#   build-and-run:
-#     jobs:
-#       - build
+#     example-workflow:
+#       jobs:
+#         - cypress/run:
+#             include-branch-in-node-cache-key: false 
+#             install-browsers: true 
+#             package-manager: npm 
+#             cypress-cache-key: custom-cypress-cache-v1-{{ arch }}-{{ checksum "package.json" }} 
+#             cypress-cache-path: ~/.cache/custom-dir/Cypress 
+#             cypress-command: npm run test:cypress-parallel 
+#             parallelism: 5 
+#             working-directory: ~/project
+jobs:
+  build:
+    docker:
+      - image: cypress/browsers:node-18.16.0-chrome-114.0.5735.133-1-ff-114.0.2-edge-114.0.1823.51-1 
+    parallelism: 8
+    steps:
+      - checkout
+      # - restore_cache: 
+      #       key: node_modules
+      - run: node --version
+      - run: npm cache clean --force
+      - run: npm install
+      - run: npx cypress --version
+      - run: 
+          name: Prepare Package Files
+          command: |
+            TARGET_DIR="/tmp"
+            if [ -n "$HOMEDRIVE" ]; then
+              TARGET_DIR="$HOMEDRIVE\\tmp"
+            fi
+
+            if [ -f "package-lock.json" ]; then
+              echo "Found package-lock.json file, assuming lockfile"
+              cp package-lock.json $TARGET_DIR/node-project-lockfile
+            elif [ -f "npm-shrinkwrap.json" ]; then
+              echo "Found npm-shrinkwrap.json file, assuming lockfile"
+              cp npm-shrinkwrap.json $TARGET_DIR/node-project-lockfile
+            elif [ -f "yarn.lock" ]; then
+              echo "Found yarn.lock file, assuming lockfile"
+              cp yarn.lock $TARGET_DIR/node-project-lockfile
+            fi
+
+            cp package.json $TARGET_DIR/node-project-package.json
+      - save_cache:
+          paths:
+            - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
+          key: 
+            node_modules
+      - run: npm run test:smoke-desktop-login-suite
+workflows:
+  version: 2.1 
+  build-and-run:
+    jobs:
+      - build
 
