@@ -1,27 +1,84 @@
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@3.1.3
+
+jobs:
+  create-dummy-artifacts:
+    docker:
+      - image: circleci/node:18
+    steps:
+      - checkout
+      - run:
+          name: Creating Dummy Artifacts
+          command: |
+            echo "my artifact file" > ~/project/art-1
+            mkdir -p ~/project/artifacts
+            echo "my artifact files in a dir" > ~/project/artifacts/art-2
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - artifacts/
+
+  run-cypress-tests:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - cypress-cache-{{ checksum "package.json" }}
+      - run:
+          name: Installing Dependencies
+          command: npm install
+      - save_cache:
+          paths:
+            - ~/.cache/Cypress
+          key: cypress-cache-{{ checksum "package.json" }}
+      - run:
+          name: Running Cypress Tests
+          command: npm run test:cypress-parallel
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - artifacts/
+
 workflows:
-    example-workflow:
-      jobs:
-        - cypress/run:
-            include-branch-in-node-cache-key: false 
-            install-browsers: true 
-            package-manager: npm 
-            cypress-cache-key: custom-cypress-cache-v1-{{ arch }}-{{ checksum "package.json" }} 
-            cypress-cache-path: ~/.cache/custom-dir/Cypress 
-            cypress-command: npm run test:cypress-parallel 
-            parallelism: 5 
-            working-directory: ~/project
-            post-steps:
-              - run:
-                  name: Creating Dummy Artifacts
-                  command: |
-                    echo "my artifact file" > ~/project/art-1;
-                    mkdir ~/project/artifacts;
-                    echo "my artifact files in a dir" > ~/project/artifacts/art-2;
-              - store_artifacts:
-                  path: ~/project/artifacts
+  version: 2
+  example-workflow:
+    jobs:
+      - create-dummy-artifacts
+      - run-cypress-tests:
+          requires:
+            - create-dummy-artifacts
+
+
+# version: 2.1
+# orbs:
+#   cypress: cypress-io/cypress@3.1.3
+# workflows:
+#   example-workflow:
+#     jobs:
+#       - cypress/run:
+#           include-branch-in-node-cache-key: false 
+#           install-browsers: true 
+#           package-manager: npm 
+#           cypress-cache-key: custom-cypress-cache-v1-{{ arch }}-{{ checksum "package.json" }} 
+#           cypress-cache-path: ~/.cache/custom-dir/Cypress 
+#           cypress-command: npm run test:cypress-parallel 
+#           parallelism: 5 
+#           : 
+#               name: aritfacts directory
+#               command: |
+#                 echo "my artifact file" > ~/project/art-1;
+#                 mkdir -p /home/circleci/project/artifacts;
+#                 echo "my artifact files in a dir" > ~/project/artifacts/art-2;
+#           persist_to_workspace:
+#             root: /home/circleci/project
+#             paths:
+#               - artifacts/
+
+
+                  
 
 
 # version: 2
