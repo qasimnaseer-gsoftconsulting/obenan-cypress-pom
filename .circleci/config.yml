@@ -1,51 +1,27 @@
+
 version: 2.1
-jobs:
-  cypress-e2e:
+orbs:
+  cypress: cypress-io/cypress@1
+executors:
+  with-chrome:
+    resource_class: small
     docker:
-      - image: cypress/base:8
-        environment:
-          TERM: xterm
-    working_directory: /path/to/obenan-cypress-pom
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-npm-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v1-npm-deps-{{ .Branch }}-
-            - v1-npm-deps-
-      - run: npm install
-      - save_cache:
-          key: v1-npm-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
-          paths:
-            - ~/.npm
-            - ~/.cache  
-      - run:
-          when: always
-          name: Run Cypress E2E
-          command: npm run cypress
-      - store_artifacts:
-          path: cypress/reports
-      - store_artifacts:
-          path: cypress/videos
- 
+      - image: 'cypress/browsers:node14.16.0-chrome90-ff88'
 workflows:
-  build-test:
+  build:
     jobs:
-      - cypress-e2e
- 
-  # nightly:
-  #   triggers:
-  #     - schedule:
-  #         cron: "0 0 * * *"
-  #         filters:
-  #           branches:
-  #             only:
-  #               - circle_ci
- 
-  #   jobs:
-  #     - cypress-e2e  
-
-
+      - cypress/install
+      - cypress/run:
+          requires:
+            - cypress/install
+          executor: with-chrome
+          browser: chrome
+          post-steps:
+            - run: ls
+            - store_test_results:
+                path: cypress/results
+            - store_artifacts:
+                path: cypress/screenshots
 # =======================================================================================
 
 # version: 2.1
