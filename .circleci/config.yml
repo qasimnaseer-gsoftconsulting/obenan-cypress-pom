@@ -5,10 +5,10 @@ orbs:
 jobs:
   create-dummy-artifacts:
     docker:
-      - image: circleci/node:18
+      - image: circleci/node:14
     steps:
       - checkout
-      - run:
+      - run: 
           name: Creating Dummy Artifacts
           command: |
             echo "my artifact file" > ~/project/art-1
