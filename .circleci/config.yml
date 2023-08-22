@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cypress/base:14
+      - image: cimg/node:20.5.1 
     steps:
       - checkout
       - run: node --version
@@ -12,10 +12,12 @@ jobs:
 
   cypress-run:
     docker:
-      - image: cypress/base:14
+      - image: cimg/node:20.5.1 
     steps:
       - checkout
+      - run: npm install
       - run: npx cypress run
+    # ...
 
 workflows:
   version: 2.1 
