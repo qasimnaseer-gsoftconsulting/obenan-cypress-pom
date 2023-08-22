@@ -5,7 +5,7 @@ orbs:
 jobs:
   create-dummy-artifacts:
     docker:
-      - image: circleci/node:14
+      - image: circleci/node:20.04
     steps:
       - checkout
       - run: 
