@@ -9,9 +9,8 @@ jobs:
     steps:
       - cypress/install:
           install-command: npm install 
+          include-branch-in-node-cache-key: false 
           install-browsers: true 
-          include-branch-in-node-cache-key: true 
-          package-manager: npm 
           node-cache-version: v1 
           working-directory: ~/project
       - cypress/run-tests:
