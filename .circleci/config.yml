@@ -3,7 +3,8 @@ jobs:
   build:
     docker:
       - image: cypress/base:18.16.0 
-    parallelism: 28
+    resource_class: 2xlarge+
+    parallelism: 38
     steps:
       - checkout
       # - restore_cache: 
