@@ -16,6 +16,7 @@ jobs:
             - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
           key: 
             node_modules
+      - run: npx cypress run
 
   cypress-run:
     docker:
