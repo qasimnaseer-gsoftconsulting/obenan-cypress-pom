@@ -15,9 +15,25 @@ jobs:
             - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
           key: 
             node_modules
-    
+  cypress-run:
+    docker:
+      - image: cimg/node:20.5.1 
+    steps:
+      - checkout
+      - restore_cache: 
+            key: node_modules
+      - run: npx cypress run
+      - save_cache:
+          paths:
+            - npm-cache-{{ .Branch }}-{{ checksum "package.json" }}
+          key: 
+            node_modules
+            
 workflows:
   version: 2.1 
   build-and-run:
     jobs:
       - build
+      - cypress-run:
+          requires:
+            - build
