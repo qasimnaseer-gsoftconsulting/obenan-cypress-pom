@@ -6,8 +6,9 @@ jobs:
     steps:
       - checkout
       - run: node --version
-      - restore_cache: 
-            key: node_modules
+      - run: npm cache clean --force
+      # - restore_cache: 
+      #       key: node_modules
       - run: npm install
       - run: npx cypress --version
       - run: sudo apt-get update
