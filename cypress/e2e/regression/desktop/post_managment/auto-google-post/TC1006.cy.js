@@ -131,6 +131,8 @@ describe('[TC1006]', () => {
         //Step 35 : Click on confirm button
         autoGooglePosts.postContainerPopupConfirmBtn().click({force : true });
         autoGooglePosts.postDeletedToastMsg().should('be.visible');
+        //ajfadkffalkfjkldjf 
+        //adklfjkfkfj
       
     });
 

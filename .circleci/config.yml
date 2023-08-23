@@ -18,7 +18,7 @@ workflows:
                 path: /home/circleci/cypress/screenshots
             - store_artifacts: 
                 path: /home/circleci/cypress/screenshots
-        
+
 
 
               
