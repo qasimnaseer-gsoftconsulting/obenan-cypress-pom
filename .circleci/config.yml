@@ -5,7 +5,7 @@ orbs:
 jobs:
   windows-job:
     machine:
-      image: windows/11
+      image: circleci/windows@2022
     steps:
       - checkout
       - run:
