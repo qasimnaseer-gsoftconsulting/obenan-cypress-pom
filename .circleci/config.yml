@@ -1,5 +1,5 @@
 version: 2.1
-orbs:
+orbs: 
   cypress: cypress-io/cypress@3.1.3
 workflows:
   example-workflow:
