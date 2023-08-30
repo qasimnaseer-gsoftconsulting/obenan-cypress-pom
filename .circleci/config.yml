@@ -2,7 +2,7 @@ version: 2.1
 executors:
   win-executor:
     docker:
-      - image: circleci/windows:2022
+      - image: windows/insider
         environment:
           NODE_VERSION: 18
 
